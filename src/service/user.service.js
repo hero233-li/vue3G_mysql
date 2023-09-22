@@ -35,26 +35,5 @@ class UserService {
     const [values] = await connection.execute(statement, [iphone])
     return values
   }
-  async InquireAccount(data) {
-    const statement = 'select uuid from Guser where useraccount=? and userpwd=?'
-    const password = encryptionMD5(data.password)
-    const [values] = await connection.execute(statement, [data.account, password])
-    console.log('InquireAccount:查询到的uuid', values)
-    return values
-  }
-  async InquireAccountIPhone(data) {
-    const statement = 'select uuid from Guser where useriphone=? and userpwd=?'
-    const password = encryptionMD5(data.password)
-    const [values] = await connection.execute(statement, [data.iphone, password])
-    console.log('InquireAccount:查询到的uuid', values)
-    return values
-  }
-  async InquireAccountEmail(data) {
-    const statement = 'select uuid from Guser where useremail=? and userpwd=?'
-    const password = encryptionMD5(data.password)
-    const [values] = await connection.execute(statement, [data.email, password])
-    console.log('InquireAccount:查询到的uuid', values)
-    return values
-  }
 }
 module.exports = new UserService()
