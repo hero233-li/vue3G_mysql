@@ -1,6 +1,6 @@
 const KoaRouter = require('@koa/router')
-const userController = require('../controller/user.controller')
-const { verifyUser, encryptionPwd } = require('../middleware/user.middleware')
+const userController = require('../controller/register/user.controller')
+const { verifyUser, encryptionPwd } = require('../middleware/register/user.middleware')
 const userRouter = new KoaRouter({
   prefix: '/api/user'
 })

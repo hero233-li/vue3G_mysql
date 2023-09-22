@@ -1,6 +1,6 @@
-const { connection } = require('../app/database')
+const { connection } = require('../../app/database')
 const uuid = require('node-uuid')
-const { encryptionMD5 } = require('../utils/encryptionMD5')
+const { encryptionMD5 } = require('../../utils/encryptionMD5')
 
 class UserService {
   /**

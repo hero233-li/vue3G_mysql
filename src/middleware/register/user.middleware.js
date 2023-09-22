@@ -1,7 +1,6 @@
-const userService = require('../service/user.service')
-const { app } = require('../app')
-const { IPHONE_EXIST_40001 } = require('../config/error-contanst')
-const { encryptionMD5 } = require('../utils/encryptionMD5')
+const userService = require('../../service/register/user.service')
+const { IPHONE_EXIST_40001 } = require('../../config/error-contanst')
+const { encryptionMD5 } = require('../../utils/encryptionMD5')
 /**
  * 数据验证
  * @param ctx
@@ -18,11 +17,8 @@ const verifyUser = async (ctx, next) => {
    */
   const iphoneUUID = await userService.InquireIphone(user.iphone)
   if (iphoneUUID.length > 0) {
-    console.log(iphoneUUID)
-    ctx.app.emit('error', IPHONE_EXIST_40001, ctx)
-    return
+    return ctx.app.emit('registerError', IPHONE_EXIST_40001, ctx)
   }
-  console.log('已经通过初步验证')
   await next()
 }
 /**
@@ -32,7 +28,6 @@ const encryptionPwd = async (ctx, next) => {
   const { password } = ctx.request.body
 
   ctx.request.body.password = encryptionMD5(password)
-  console.log(ctx.request.body.password)
 
   await next()
 }
