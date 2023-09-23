@@ -1,6 +1,4 @@
 const { connection } = require('../../app/database')
-const { encryptionMD5 } = require('../../utils/encryptionMD5')
-
 class LoginService {
   async InquireUserIphone(iphone = null) {
     const statement = 'select * from Guser where useriphone=?'
@@ -19,7 +17,7 @@ class LoginService {
   }
   async getUserInfoById(uuid) {
     const statement = `select * from guser where uuid=?`
-    const [values] = await connection.execute(statement, [uuid])
+    const [[values]] = await connection.execute(statement, [uuid])
     return values
   }
 }

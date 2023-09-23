@@ -20,8 +20,7 @@ class LoginController {
   }
   async QueryAccountInfo(ctx, next) {
     const { uuid } = ctx.user
-    const result = await loginService.getUserInfoById(uuid).then((res) => res[0])
-    ctx.body = result
+    ctx.body = await loginService.getUserInfoById(uuid)
   }
 }
 module.exports = new LoginController()
