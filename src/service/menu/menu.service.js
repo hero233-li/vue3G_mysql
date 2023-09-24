@@ -51,14 +51,11 @@ class MenuService {
 
       for (let j = 0; j < MenuItemLength; j++) {
         const isChirlden = MenuData[j].menu_group_id === MenuGroupData[i].menu_group_id
-        console.log(isChirlden)
         if (isChirlden) {
           MenuGroupData[i].menu_chirlden[j] = JSON.parse(JSON.stringify(MenuData[j]))
         }
       }
     }
-
-    console.log(MenuGroupData[0].menu_chirlden)
     return MenuGroupData
   }
 }
