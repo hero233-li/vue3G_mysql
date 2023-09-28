@@ -5,9 +5,10 @@ const { verifyAuth } = require('../middleware/login/login.middleware')
 const roleRouter = new KoaRouter({
   prefix: '/api/role'
 })
-// accountRouter.post('/queryList', verifyAuth, AccountController.queryAllAccount)
-// accountRouter.delete('/deleteAccount', verifyAuth, AccountController.removeAccount)
+
 roleRouter.post('/queryList', verifyAuth, RoleController.queryAllRole)
+roleRouter.post('/roleName', verifyAuth, RoleController.queryRoleName)
+
 module.exports = {
   roleRouter
 }

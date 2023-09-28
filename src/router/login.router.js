@@ -6,7 +6,10 @@ const jwt = require('jsonwebtoken')
 const loginRouter = new KoaRouter({
   prefix: '/api/login'
 })
-loginRouter.post('/iphone', verifyLogin, loginController.iphoneLogin)
+loginRouter.post('/iphone', verifyLogin, loginController.accountLogin)
+loginRouter.post('/account', verifyLogin, loginController.accountLogin)
+loginRouter.post('/email', verifyLogin, loginController.accountLogin)
+
 loginRouter.get('/query', verifyAuth, loginController.QueryAccountInfo)
 module.exports = {
   loginRouter

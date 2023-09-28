@@ -26,7 +26,6 @@ class AccountService {
      * limit 表示一页显示多少，offest表示第几页-（0-无限）
      * 例如select * from article LIMIT 3 OFFSET 1 表示跳过1条数据,从第2条数据开始取，取3条数据，也就是取2,3,4三条数据
      */
-    console.log(statement)
     const [result] = await connection.query(statement)
     return result
   }
@@ -53,7 +52,6 @@ class AccountService {
     const result = await connection.execute(statement, [uuid])
   }
   async addAccount(userinfo) {
-    console.log(userinfo)
     const statement = `
 insert into guser 
 (uuid, useraccount,userdepartment,useremail,username,userpwd,userremark,userrole,useriphone)
@@ -71,6 +69,39 @@ insert into guser
       userinfo.userpwd,
       userinfo.useriphone
     ])
+  }
+
+  async editAccount(userinfo) {
+    console.log('修改用户信息')
+    console.log(userinfo.uuid, userinfo.userpwd)
+    console.log(userinfo)
+    const statement = `
+update guser
+set
+   useraccount=?
+  ,userdepartment=?
+  ,useremail=?
+  ,username=?
+  ,userremark=?
+  ,userrole=?
+  ,useriphone=?
+where uuid = ?
+ `
+    const result = await connection.execute(statement, [
+      userinfo.useraccount,
+      userinfo.userdepartment,
+      userinfo.useremail,
+      userinfo.username,
+      userinfo.userremark,
+      userinfo.userrole,
+      userinfo.useriphone,
+      userinfo.uuid
+    ])
+  }
+  async editState(userinfo) {
+    const statement = `update guser set   userstate=? where uuid = ?`
+    console.log(userinfo.userstate)
+    const result = await connection.execute(statement, [userinfo.userstate, userinfo.uuid])
   }
 }
 

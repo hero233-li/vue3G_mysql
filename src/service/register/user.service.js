@@ -9,15 +9,16 @@ class UserService {
    * @returns {Promise<*>}
    */
   async register(user) {
-    const { email, iphone, password } = user
+    const { email, iphone, account, password } = user
     const username = '默认用户'
-
+    console.log(user)
     const statement =
-      'insert into Guser (uuid, username, useriphone, useremail, userpwd) VALUE (?,?,?,?,?)'
+      'insert into Guser (uuid, username, useriphone,useraccount, useremail, userpwd) VALUE (?,?,?,?,?,?)'
     const [result] = await connection.execute(statement, [
       uuid().toUpperCase(),
       username,
       iphone,
+      account,
       email,
       password
     ])

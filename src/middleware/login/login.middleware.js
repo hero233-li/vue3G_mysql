@@ -27,13 +27,13 @@ const verifyLogin = async (ctx, next) => {
   const { iphone, email, account, password } = user.accountData
   let Current = 0
   let users = {}
-  if (iphone.length > 1) {
+  if (iphone) {
     Current = 1
     users = await loginService.InquireUserIphone(iphone)
-  } else if (email.length > 1) {
+  } else if (email) {
     Current = 2
     users = await loginService.InquireUserEmail(email)
-  } else if (account.length > 1) {
+  } else if (account) {
     Current = 3
     users = await loginService.InquireUserAccount(account)
   }

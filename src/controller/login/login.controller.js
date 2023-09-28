@@ -10,7 +10,7 @@ class LoginController {
    * @param next
    * @returns {Promise<void>}
    */
-  async iphoneLogin(ctx, next) {
+  async accountLogin(ctx, next) {
     const { uuid, username } = ctx.user
     const token = jwt.sign({ uuid, username }, PRIVATE_KEY, {
       expiresIn: 24 * 60 * 60,

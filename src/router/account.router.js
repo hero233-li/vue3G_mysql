@@ -8,6 +8,8 @@ const accountRouter = new KoaRouter({
 accountRouter.post('/queryList', verifyAuth, AccountController.queryAllAccount)
 accountRouter.delete('/deleteAccount', verifyAuth, AccountController.removeAccount)
 accountRouter.post('/addAccount', verifyAuth, AccountController.addAccount)
+accountRouter.post('/editAccount', verifyAuth, AccountController.editAccount)
+accountRouter.post('/editState', verifyAuth, AccountController.editState)
 
 module.exports = {
   accountRouter

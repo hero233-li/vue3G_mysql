@@ -21,5 +21,15 @@ class AccountController {
     await AccountService.addAccount(userinfo)
     ctx.body = { code: 0, message: '注册成功' }
   }
+  async editAccount(ctx, next) {
+    const userinfo = ctx.request.body
+    await AccountService.editAccount(userinfo)
+    ctx.body = { code: 0, message: '修改成功' }
+  }
+  async editState(ctx, next) {
+    const userinfo = ctx.request.body
+    await AccountService.editState(userinfo)
+    ctx.body = { code: 0, message: '修改成功' }
+  }
 }
 module.exports = new AccountController()
