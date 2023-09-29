@@ -12,6 +12,44 @@ class MenuService {
     const [valuesMenuGroup] = await connection.execute(statementMenuGroup)
     return valuesMenuGroup
   }
+  async queryListMenu(searchInfo) {
+    const statement =
+      `select * from gmenu_tab gt ` +
+      // ' where (a.username like' +
+      // mysql.escape('%' + searchInfo.username + '%') +
+      // ' and  a.useraccount like' +
+      // mysql.escape('%' + searchInfo.useraccount + '%') +
+      // ' and a.useriphone like' +
+      // mysql.escape('%' + searchInfo.useriphone + '%') +
+      // ' and a.useremail like' +
+      // mysql.escape('%' + searchInfo.useremail + '%') +
+      // ' and a.userstate like' +
+      // mysql.escape('%' + searchInfo.userstate + '%') +
+      // ')' +
+      ` limit ` +
+      searchInfo.limit +
+      ` offset ` +
+      searchInfo.offset
+    const [result] = await connection.query(statement)
+    console.log(result)
+    return result
+  }
+  async queryCountMenu() {
+    const statement = `select count(*) as totalCount from gmenu_tab gt `
+    // ' where (a.username like' +
+    // mysql.escape('%' + searchInfo.username + '%') +
+    // ' and  a.useraccount like' +
+    // mysql.escape('%' + searchInfo.useraccount + '%') +
+    // ' and a.useriphone like' +
+    // mysql.escape('%' + searchInfo.useriphone + '%') +
+    // ' and a.useremail like' +
+    // mysql.escape('%' + searchInfo.useremail + '%') +
+    // ' and a.userstate like' +
+    // mysql.escape('%' + searchInfo.userstate + '%') +
+    // ')' +
+    const [[result]] = await connection.query(statement)
+    return result
+  }
 
   /**
    *     //todo mysql2的in查询，不能用execute，须要用query

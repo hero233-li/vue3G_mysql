@@ -8,6 +8,7 @@ const menuRouter = new KoaRouter({
 menuRouter.get('/queryAllMenu', verifyAuth, menuController.queryAllMenu)
 menuRouter.get('/queryAllMenuGroup', verifyAuth, menuController.queryAllMenuGroup)
 menuRouter.get('/queryUserMenu', verifyAuth, menuController.queryUserMenu)
+menuRouter.post('/queryList', verifyAuth, menuController.queryListMenu)
 
 module.exports = {
   menuRouter

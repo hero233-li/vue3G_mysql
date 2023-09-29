@@ -9,8 +9,16 @@ class MenuController {
   }
   async queryUserMenu(ctx, next) {
     const uuid = ctx.user.uuid
-
     ctx.body = await menuService.queryUserMenu(uuid)
+  }
+  async queryListMenu(ctx, next) {
+    const searchInfo = ctx.request.body
+    const list = await menuService.queryListMenu(searchInfo)
+    const totalCount = await menuService.queryCountMenu()
+    ctx.body = {
+      list,
+      totalCount
+    }
   }
 }
 

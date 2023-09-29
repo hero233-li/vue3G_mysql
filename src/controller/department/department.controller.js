@@ -1,7 +1,16 @@
 const DepartmentService = require('../../service/department/department.service')
 class DepartmentController {
-  async queryAllDepartment(ctx, next) {
-    ctx.body = await DepartmentService.queryAllDepartment()
+  async queryListDepartment(ctx, next) {
+    const searchInfo = ctx.request.body
+    const Arraylist = await DepartmentService.SQLQueryAllDepartment(searchInfo)
+    const totalCount = await DepartmentService.SQLQueryCountDepartment()
+
+    const list = Object.values(Arraylist)
+
+    ctx.body = {
+      list,
+      totalCount
+    }
   }
 }
 

@@ -2,12 +2,13 @@ const KoaRouter = require('@koa/router')
 const AccountController = require('../controller/account/account.controller')
 const { verifyAuth } = require('../middleware/login/login.middleware')
 const DepartmentController = require('../controller/department/department.controller')
+const menuController = require('../controller/menu/menu.controller')
 
 const departmentRouter = new KoaRouter({
   prefix: '/api/department'
 })
-// accountRouter.post('/queryList', verifyAuth, AccountController.queryAllAccount)
-departmentRouter.post('/queryList', verifyAuth, DepartmentController.queryAllDepartment)
+departmentRouter.post('/queryList', verifyAuth, DepartmentController.queryListDepartment)
+
 module.exports = {
   departmentRouter
 }
