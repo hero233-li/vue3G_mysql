@@ -8,6 +8,8 @@ const departmentRouter = new KoaRouter({
   prefix: '/api/department'
 })
 departmentRouter.post('/queryList', verifyAuth, DepartmentController.queryListDepartment)
+departmentRouter.post('/queryGroup', verifyAuth, DepartmentController.queryGroupDepartment)
+departmentRouter.post('/editStatus', verifyAuth, DepartmentController.editStatusDepartment)
 
 module.exports = {
   departmentRouter

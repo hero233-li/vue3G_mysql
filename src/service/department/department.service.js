@@ -8,19 +8,18 @@ class DepartmentService {
    * @constructor
    */
   async SQLQueryAllDepartment(searchInfo) {
+    console.log(typeof searchInfo.department_name === 'undefined')
+    searchInfo.department_name =
+      typeof searchInfo.department_name === 'undefined' ? '' : searchInfo.department_name
+    searchInfo.department_state =
+      typeof searchInfo.department_state === 'undefined' ? '' : searchInfo.department_state
     const SQLChirlden =
       `select * from gdepartment gm ` +
-      // ' where (a.username like' +
-      // mysql.escape('%' + searchInfo.username + '%') +
-      // ' and  a.useraccount like' +
-      // mysql.escape('%' + searchInfo.useraccount + '%') +
-      // ' and a.useriphone like' +
-      // mysql.escape('%' + searchInfo.useriphone + '%') +
-      // ' and a.useremail like' +
-      // mysql.escape('%' + searchInfo.useremail + '%') +
-      // ' and a.userstate like' +
-      // mysql.escape('%' + searchInfo.userstate + '%') +
-      // ')' +
+      ' where (gm.department_name like' +
+      mysql.escape('%' + searchInfo.department_name + '%') +
+      ' and  gm.department_state like' +
+      mysql.escape('%' + searchInfo.department_state + '%') +
+      ')' +
       ` limit ` +
       searchInfo.limit +
       ` offset ` +
@@ -46,12 +45,24 @@ class DepartmentService {
       const item = GroupData[i]
       item.children = Object.values(item.children)
     }
+    console.log(SQLChirlden)
     return GroupData
   }
   async SQLQueryCountDepartment() {
     const statement = `select count(*) as totalCount from gdepartment gm`
     const [[result]] = await connection.query(statement)
     return result.totalCount
+  }
+  async SQLQueryGroupDepartment() {
+    const statement = `select * from gdepartment_group ggp`
+    const [result] = await connection.query(statement)
+    return result
+  }
+  async SQLEditStatusDepartment(info) {
+    const statement = `update gdepartment_group set   department_state=? where department_group_id = ?`
+    const result = await connection.execute(statement, [info.state, info.id])
+
+    return result
   }
 }
 

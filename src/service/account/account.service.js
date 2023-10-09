@@ -100,7 +100,6 @@ where uuid = ?
   }
   async editState(userinfo) {
     const statement = `update guser set   userstate=? where uuid = ?`
-    console.log(userinfo.userstate)
     const result = await connection.execute(statement, [userinfo.userstate, userinfo.uuid])
   }
 }
